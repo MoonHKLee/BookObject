@@ -6,14 +6,14 @@ public class Theater {
     }
 
     public void enter(Audience audience) {
-        if (audience.getBag().hasInvitation()) {
-            Ticket ticket = ticketSeller.getTicketOffice().getTicket();
-            audience.getBag().setTicket(ticket);
+        if (audience.hasInvitation()) {
+            Ticket ticket = ticketSeller.getTicketFromOffice();
+            audience.setTicket(ticket);
         } else {
-            Ticket ticket = ticketSeller.getTicketOffice().getTicket();
-            audience.getBag().minusAmount(ticket.getFee());
-            ticketSeller.getTicketOffice().plusAmount(ticket.getFee());
-            audience.getBag().setTicket(ticket);
+            Ticket ticket = ticketSeller.getTicketFromOffice();
+            Long fee = audience.bill(ticket.getFee());
+            ticketSeller.addFeeToOffice(fee);
+            audience.setTicket(ticket);
         }
     }
 }
