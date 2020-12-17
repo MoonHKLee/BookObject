@@ -6,14 +6,6 @@ public class Theater {
     }
 
     public void enter(Audience audience) {
-        if (audience.hasInvitation()) {
-            Ticket ticket = ticketSeller.getTicketFromOffice();
-            audience.setTicket(ticket);
-        } else {
-            Ticket ticket = ticketSeller.getTicketFromOffice();
-            Long fee = audience.bill(ticket.getFee());
-            ticketSeller.addFeeToOffice(fee);
-            audience.setTicket(ticket);
-        }
+        ticketSeller.changeOrSellTicket(audience);
     }
 }

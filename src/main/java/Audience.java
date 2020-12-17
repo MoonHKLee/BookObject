@@ -5,20 +5,16 @@ public class Audience {
         this.bag = bag;
     }
 
-    private Bag getBag() {
-        return bag;
-    }
-
     public boolean hasInvitation() {
-        return getBag().hasInvitation();
+        return bag.hasInvitation();
     }
 
     public void setTicket(Ticket ticket) {
-        getBag().setTicket(ticket);
+        bag.setTicket(ticket);
     }
 
     public Long bill(Long amount) {
-        return getBag().minusAmount(amount);
+        return bag.minusAmount(amount);
     }
 
 }

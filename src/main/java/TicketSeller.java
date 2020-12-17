@@ -5,12 +5,19 @@ public class TicketSeller {
         this.ticketOffice = ticketOffice;
     }
 
-    public Ticket getTicketFromOffice() {
-        return ticketOffice.getTicket();
+    private void addFeeToOffice(Long amount) {
+        ticketOffice.plusAmount(amount);
     }
 
-    public void addFeeToOffice(Long amount) {
-        ticketOffice.plusAmount(amount);
+    public void changeOrSellTicket(Audience audience) {
+        Ticket ticket = ticketOffice.getTicket();
+
+        if (!audience.hasInvitation()) {
+            Long fee = audience.bill(ticket.getFee());
+            addFeeToOffice(fee);
+        }
+
+        audience.setTicket(ticket);
     }
 
 }
